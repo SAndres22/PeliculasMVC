@@ -1,0 +1,62 @@
+﻿@model PeliculasMVC.Models.Pelicula
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h2 class="mt-2">Cargar Pelicula</h2>
+<hr />
+<div class="card p-3 col-6 m-auto">
+    <div>
+        <div class="col">
+            <form asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group mb-2">
+                    <label asp-for="Titulo" class="control-label"></label>
+                    <input asp-for="Titulo" class="form-control" />
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-2">
+                    <label asp-for="Fecha_Lanzamiento" class="control-label"></label>
+                    <input asp-for="Fecha_Lanzamiento" class="form-control" />
+                    <span asp-validation-for="Fecha_Lanzamiento" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-2">
+                    <label>Géneros</label>
+                    <div class="row">
+                        @foreach (var genero in ViewBag.Generos)
+                        {
+                            <div class="col-sm-3">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="generosSeleccionados" value="@genero.Value" />
+                                        @genero.Text
+                                    </label>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="form-group mb-2">
+                    <label asp-for="Precio" class="control-label"></label>
+                    <input asp-for="Precio" class="form-control" />
+                    <span asp-validation-for="Precio" class="text-danger"></span>
+                </div>
+                <div class="form-group text-center">
+                    <input type="submit" value="Create" class="btn btn-outline-success" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a class="btn btn-outline-primary float-end" asp-action="Index">Volver a Peliculas</a>
+    </div>
+
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

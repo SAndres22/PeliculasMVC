@@ -1,0 +1,92 @@
+﻿@model IEnumerable<PeliculasMVC.Models.Pelicula>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@* @System.Globalization.CultureInfo.CurrentUICulture; *@
+
+@section navCont {
+    <div>
+        <form asp-controller="Movies" method="get" asp-action="BuscarPelicula" class="d-flex">
+            <input style="margin-right: 5px;" class="form-control" type="text" name="cadenabuscarPelicula" placeholder="Buscar.." />
+                <input class="btn btn-outline-primary" type="submit" value="Buscar" />
+        </form>
+    </div>
+    
+}
+
+@section generos {
+    <div>
+        <ul class="d-flex justify-content-around p-3">
+            @foreach (var genero in ViewBag.AllGeneros)
+            {
+                <li><a style="color: #33B2E5;" asp asp-controller="Movies" asp-route-genero="@genero.Text" asp-action="BuscarPorGenero">@genero.Text</a></li>
+            }
+        </ul>
+    </div>
+}
+
+<div class="card p-3">
+
+<h1>Peliculas Disponibles</h1>
+
+@if (Model.Count() > 0)
+{
+    <table class="table text-center">
+        <thead>
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Titulo)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Fecha_Lanzamiento)
+                </th>
+                <th scope="col">
+                    Generos
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Precio)
+                </th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody class="">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.Titulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Fecha_Lanzamiento)
+                    </td>
+                    <td>
+                        @foreach (var peliculaGenero in item.PeliculaGenero)
+                        {
+                            <span>@peliculaGenero.Genero.Nombre</span>
+                            @if (peliculaGenero != item.PeliculaGenero.Last())
+                            {
+                                <span>,</span>
+                            }
+                        }
+                        
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Precio)
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-info" asp-action="Edit" asp-route-id="@item.Id_Pelicula">Editar</a> 
+                        <a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@item.Id_Pelicula">Detalle</a> 
+                        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id_Pelicula">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h2>No hay peliculas</h2>
+}
+</div>

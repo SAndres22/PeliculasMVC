@@ -1,0 +1,49 @@
+﻿@model PeliculasMVC.Models.Pelicula
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Estas seguro de eliminar esta pelicula?</h3>
+<hr />
+
+<div class="card p-3 col-5 m-auto">
+    <dl class="row">
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.Fecha_Lanzamiento)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.Fecha_Lanzamiento)
+        </dd>
+        <dt class="col-sm-4">
+            Generos:
+        </dt>
+        <dd class="col-sm-8">
+            @foreach (var peliculaGenero in Model.PeliculaGenero)
+            {
+                <span>@peliculaGenero.Genero.Nombre</span>
+            }
+        </dd>
+          
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete" class="text-center">
+        <input type="hidden" asp-for="Id_Pelicula" />
+        <input type="submit" value="Eliminar" class="btn btn-outline-danger" /> 
+        <a class="btn btn-outline-primary" asp-action="Index">Volver a peliculas</a>
+    </form>
+</div>

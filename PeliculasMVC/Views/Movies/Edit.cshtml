@@ -1,0 +1,63 @@
+﻿@model PeliculasMVC.Models.Pelicula
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Editar @Html.DisplayFor(m => m.Titulo) </h2>
+
+<hr />
+<div class="card p-3 col-6 m-auto">
+    <div class="col">
+        <div>
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id_Pelicula" />
+                <div class="form-group mb-2">
+                    <label asp-for="Titulo" class="control-label"></label>
+                    <input asp-for="Titulo" class="form-control" />
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-2">
+                    <label asp-for="Fecha_Lanzamiento" class="control-label"></label>
+                    <input asp-for="Fecha_Lanzamiento" class="form-control" />
+                    <span asp-validation-for="Fecha_Lanzamiento" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-2">
+
+                    <label>Géneros</label>
+                    <div class="row">
+                        @foreach (var genero in ViewBag.AllGeneros)
+                        {
+                            <div class="col-sm-3">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="generosSeleccionados" value="@genero.Id_Genero" @(Model.PeliculaGenero.Any(pg => pg.GeneroId == genero.Id_Genero) ? "checked" : "") />
+                                        @genero.Nombre
+                                    </label>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="form-group mb-2">
+                    <label asp-for="Precio" class="control-label"></label>
+                    <input asp-for="Precio" class="form-control" />
+                    <span asp-validation-for="Precio" class="text-danger"></span>
+                </div>
+                <div class="form-group text-center">
+                    <input type="submit" value="Guardar" class="btn btn-outline-success" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a class="btn btn-outline-primary float-end" asp-action="Index">Volver a Peliculas</a>
+    </div>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }

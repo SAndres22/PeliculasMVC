@@ -1,0 +1,47 @@
+﻿@model PeliculasMVC.Models.Pelicula
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalle</h1>
+<h4>Pelicula</h4>
+<hr />
+
+<div class="card p-3 col-5 m-auto">
+    <div>
+        <dl class="row">
+            <dt class="col-4">
+                @Html.DisplayNameFor(model => model.Titulo)
+            </dt>
+            <dd class="col-8">
+                @Html.DisplayFor(model => model.Titulo)
+            </dd>
+            <dt class="col-4">
+                @Html.DisplayNameFor(model => model.Fecha_Lanzamiento)
+            </dt>
+            <dd class="col-8">
+                @Html.DisplayFor(model => model.Fecha_Lanzamiento)
+            </dd>
+            <dt class="col-4">
+                Generos:
+            </dt>
+            <dd class="col-8">
+                @foreach (var peliculaGenero in Model.PeliculaGenero)
+                {
+                    <span>@peliculaGenero.Genero.Nombre</span>
+                }
+            </dd>
+            <dt class="col-4">
+                @Html.DisplayNameFor(model => model.Precio)
+            </dt>
+            <dd class="col-8">
+                @Html.DisplayFor(model => model.Precio)
+            </dd>
+        </dl>
+    </div>
+    <div class="m-auto">
+        <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@Model?.Id_Pelicula">Editar</a> 
+        <a class="btn btn-outline-primary" asp-action="Index">Volver a Peliculas</a>
+    </div>
+</div>

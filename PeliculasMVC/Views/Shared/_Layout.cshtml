@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SAMG PELIS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PeliculasMVC.styles.css" asp-append-version="true" />
+    <!--Linkeando Font-awesome-Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!--Linkenado Fuentes de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link rel="icon" href="~/img/icon-Pelis.png" />
+    <style>
+        .nav-menu {
+            background: #00214D;
+        }
+        .nav-generos{
+           background: #B3123B;
+        }
+         
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm box-shadow nav-menu justify-content-between">
+            <div>
+                <a class="navbar-brand" href="/">
+                    <img class="nav-logo" src="~/img/Logo-Pelis.png" alt="Logo de SamgPelis">
+                </a>
+            </div>
+            <div>
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" asp-area="" asp-controller="Movies" asp-action="Index">Peliculas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class=" nav-link text-light" asp-controller="Movies" asp-action="Create">Nueva Pelicula</a>
+                    </li>
+                </ul>
+            
+            </div>
+                @RenderSection("navCont", required: false)
+              
+            <button class="switch" id="switch">
+                <span><i class="fas fa-sun"></i></span>
+                <span><i class="fas fa-moon"></i></span>
+            </button>
+        </nav>
+        <div class="nav-generos">
+            @RenderSection("generos", required: false)
+        </div>
+
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - SAMG PELIS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
